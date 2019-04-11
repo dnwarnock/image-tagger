@@ -6,6 +6,9 @@ const init = async () => {
     const server = Hapi.server({
         port: 3000,
         host: '0.0.0.0',
+        routes: {
+            cors: true
+        }
     });
 
     server.route({
@@ -15,9 +18,6 @@ const init = async () => {
             payload: {
                 allow: 'multipart/form-data' // important
             }
-        },
-        options: {
-            cors: true
         },
         handler: async (request, h) => {
             let imageEncoded = request.payload['image'].toString('base64');
