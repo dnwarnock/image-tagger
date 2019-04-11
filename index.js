@@ -5,7 +5,7 @@ const init = async () => {
 
     const server = Hapi.server({
         port: 3000,
-        host: '0.0.0.0'
+        host: '0.0.0.0',
     });
 
     server.route({
@@ -16,9 +16,12 @@ const init = async () => {
                 allow: 'multipart/form-data' // important
             }
         },
+        options: {
+            cors: true
+        },
         handler: async (request, h) => {
             let imageEncoded = request.payload['image'].toString('base64');
-            var options = {
+            let googleVision = await rp({
                 method: 'POST',
                 uri: `https://vision.googleapis.com/v1/images:annotate?key=${process.env.KEY}`,
                 body: {
@@ -37,8 +40,7 @@ const init = async () => {
                     ]
                 },
                 json: true
-            };
-            let googleVision = await rp(options);
+            });
             let results = googleVision['responses'][0]['webDetection']['webEntities']
                 .map(function(entity){
                     return entity['description'];
