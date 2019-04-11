@@ -1,0 +1,17 @@
+{
+  "name": "live-tag",
+  "version": "1.0.0",
+  "description": "service for interacting with adobe image tagging api",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dylan Warnock",
+  "license": "ISC",
+  "dependencies": {
+    "hapi": "^18.1.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  }
+}
