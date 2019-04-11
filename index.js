@@ -33,8 +33,12 @@ const init = async () => {
                           features: [
                             {
                               type: 'WEB_DETECTION',
-                              maxResults: 10
-                            }
+                              maxResults: 4
+                            },
+                            {
+                              maxResults: 10,
+                              type: "TEXT_DETECTION"
+                            },
                           ]
                         }
                     ]
@@ -45,6 +49,8 @@ const init = async () => {
                 .map(function(entity){
                     return entity['description'];
                 });
+
+            results.push(googleVision['responses'][0]["fullTextAnnotation"]["text"]);
             return results;
         }
     });
